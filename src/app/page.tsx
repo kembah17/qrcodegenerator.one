@@ -1,65 +1,122 @@
-import Image from "next/image";
+import Link from "next/link";
+import { tools, siteConfig } from "@/lib/tools-data";
+import { WebSiteSchema } from "@/components/seo/JsonLd";
+import AdSlot from "@/components/ui/AdSlot";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <WebSiteSchema />
+
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-primary/5 via-surface to-secondary/5 dark:from-primary/10 dark:via-surface-dark dark:to-secondary/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+            <span>100% Free</span>
+            <span className="w-1 h-1 bg-primary rounded-full" />
+            <span>No Signup</span>
+            <span className="w-1 h-1 bg-primary rounded-full" />
+            <span>Client-Side</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-text dark:text-text-dark mb-6 leading-tight">
+            Free QR Code Generator<br />
+            <span className="text-primary">with Logo & Custom Colors</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg md:text-xl text-muted dark:text-text-dark-muted max-w-3xl mx-auto mb-8 leading-relaxed">
+            Generate QR codes for URLs, text, WiFi, contacts, and more. Customize colors, embed your logo, and download in PNG, SVG, or JPEG. All processing happens in your browser — your data never leaves your device.
           </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/url-qr-code" className="btn-primary text-lg px-8 py-4">
+              Create QR Code Now
+            </Link>
+            <Link href="/bulk-qr-generator" className="btn-secondary text-lg px-8 py-4">
+              Bulk Generator
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <AdSlot label="Advertisement" />
+
+        {/* Tool Grid */}
+        <section className="mt-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-text dark:text-text-dark text-center mb-3">
+            QR Code Generator Tools
+          </h2>
+          <p className="text-center text-muted dark:text-text-dark-muted mb-8 max-w-2xl mx-auto">
+            Choose a tool below to get started. All tools include free color customization and logo embedding.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {tools.map((tool) => (
+              <Link
+                key={tool.slug}
+                href={`/${tool.slug}`}
+                className="card hover:border-primary dark:hover:border-primary-light transition-all duration-200 group hover:-translate-y-1"
+              >
+                <div className="text-4xl mb-4">{tool.icon}</div>
+                <h3 className="text-lg font-semibold text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-primary-light transition-colors mb-2">
+                  {tool.name}
+                </h3>
+                <p className="text-sm text-muted dark:text-text-dark-muted leading-relaxed">
+                  {tool.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Key Features */}
+        <section className="mt-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-text dark:text-text-dark text-center mb-8">
+            Why Choose {siteConfig.name}?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: "🎨", title: "Free Color Customization", desc: "Change foreground and background colors of your QR codes. Most competitors charge for this feature — we offer it completely free." },
+              { icon: "🖼️", title: "Free Logo Embedding", desc: "Upload your logo or brand image and embed it in the center of your QR code. High error correction ensures scannability." },
+              { icon: "🔒", title: "100% Private & Secure", desc: "All QR code generation happens in your browser. Your data never touches our servers. No tracking, no data collection." },
+              { icon: "📥", title: "Multiple Download Formats", desc: "Download your QR codes as PNG, SVG, or JPEG. Choose the format that works best for print or digital use." },
+              { icon: "📦", title: "Bulk Generation", desc: "Generate hundreds of QR codes at once from a CSV file or text list. Download all as a ZIP archive." },
+              { icon: "⚡", title: "Instant Live Preview", desc: "See your QR code update in real-time as you type and customize. No waiting, no page reloads." },
+            ].map((feature) => (
+              <div key={feature.title} className="card text-center">
+                <div className="text-3xl mb-3">{feature.icon}</div>
+                <h3 className="font-semibold text-text dark:text-text-dark mb-2">{feature.title}</h3>
+                <p className="text-sm text-muted dark:text-text-dark-muted leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="mt-12">
+          <AdSlot label="Advertisement" />
         </div>
-      </main>
-    </div>
+
+        {/* SEO Content */}
+        <section className="mt-16 card max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-text dark:text-text-dark mb-4">What is a QR Code?</h2>
+          <div className="prose prose-sm max-w-none text-muted dark:text-text-dark-muted space-y-4">
+            <p>
+              A QR (Quick Response) code is a two-dimensional barcode that can store various types of data including URLs, text, WiFi credentials, and contact information. Originally invented in 1994 by Denso Wave for tracking automotive parts, QR codes have become ubiquitous in modern life — from restaurant menus to payment systems.
+            </p>
+            <p>
+              QR codes work by encoding data into a matrix of black and white squares. When scanned by a smartphone camera or QR reader app, the encoded data is instantly decoded and acted upon. For example, a URL QR code will open the website in your browser, while a WiFi QR code will prompt you to connect to the network.
+            </p>
+            <h3 className="text-lg font-semibold text-text dark:text-text-dark">How QR Code Error Correction Works</h3>
+            <p>
+              QR codes include built-in error correction using Reed-Solomon algorithms. This means even if part of the QR code is damaged or obscured (for example, by a logo in the center), it can still be scanned successfully. There are four error correction levels: Low (7%), Medium (15%), Quartile (25%), and High (30%). When embedding a logo, we recommend using High error correction to ensure reliable scanning.
+            </p>
+            <h3 className="text-lg font-semibold text-text dark:text-text-dark">Common QR Code Use Cases</h3>
+            <p>
+              Businesses use QR codes for marketing campaigns, product packaging, business cards, event tickets, and contactless payments. Restaurants use them for digital menus, while retailers use them for product information and reviews. WiFi QR codes are popular in hotels, cafes, and offices to simplify network access for guests.
+            </p>
+            <p>
+              Our free QR code generator supports all these use cases and more. With custom colors and logo embedding — features that most competitors lock behind paywalls — you can create professional, branded QR codes at no cost.
+            </p>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

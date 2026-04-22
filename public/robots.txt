@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://qrcodegenerator.one
+
+# Sitemaps
+Sitemap: https://qrcodegenerator.one/sitemap.xml
