@@ -3,8 +3,13 @@ import { siteConfig } from "@/lib/tools-data";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+
+// GSC verification loaded from env
+const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 export const metadata: Metadata = {
+  ...(gscVerification && { verification: { google: gscVerification } }),
   title: {
     default: `${siteConfig.title} - Free QR Code Generator with Logo & Colors`,
     template: `%s | ${siteConfig.name}`,
@@ -37,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-screen flex flex-col">
+        <GoogleAnalytics />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
