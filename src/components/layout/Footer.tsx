@@ -25,7 +25,7 @@ export default function Footer() {
                     className="text-sm transition-colors"
                     style={{ color: 'var(--color-footer-muted)' }}
                   >
-                    {tool.name}
+                    {tool.icon} {tool.name}
                   </Link>
                 </li>
               ))}

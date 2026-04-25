@@ -1,9 +1,14 @@
+'use client';
+
+import { useState } from 'react';
 import Link from "next/link";
 import { tools, siteConfig } from "@/lib/tools-data";
 import { WebSiteSchema } from "@/components/seo/JsonLd";
 import AdSlot from "@/components/ui/AdSlot";
 
 export default function HomePage() {
+  const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
+
   return (
     <>
       <WebSiteSchema />
@@ -18,18 +23,26 @@ export default function HomePage() {
             <span className="w-1 h-1 bg-primary rounded-full" />
             <span>Client-Side</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-text dark:text-text-dark mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight" style={{ color: 'var(--color-text-heading)' }}>
             Free QR Code Generator<br />
-            <span className="text-primary">with Logo & Custom Colors</span>
+            <span style={{ color: 'var(--color-brand)' }}>with Logo & Custom Colors</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted dark:text-text-dark-muted max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
             Generate QR codes for URLs, text, WiFi, contacts, and more. Customize colors, embed your logo, and download in PNG, SVG, or JPEG. All processing happens in your browser — your data never leaves your device.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/url-qr-code" className="btn-primary text-lg px-8 py-4">
+            <Link
+              href="/url-qr-code"
+              className="text-lg px-8 py-4 rounded-lg font-semibold transition-all duration-200"
+              style={{ backgroundColor: 'var(--color-brand)', color: '#FFFFFF' }}
+            >
               Create QR Code Now
             </Link>
-            <Link href="/bulk-qr-generator" className="btn-secondary text-lg px-8 py-4">
+            <Link
+              href="/bulk-qr-generator"
+              className="text-lg px-8 py-4 rounded-lg font-semibold transition-all duration-200"
+              style={{ backgroundColor: 'var(--color-bg-card)', color: 'var(--color-brand)', border: '2px solid var(--color-brand)' }}
+            >
               Bulk Generator
             </Link>
           </div>
@@ -41,10 +54,10 @@ export default function HomePage() {
 
         {/* Tool Grid */}
         <section className="mt-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-text dark:text-text-dark text-center mb-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3" style={{ color: 'var(--color-text-heading)' }}>
             QR Code Generator Tools
           </h2>
-          <p className="text-center text-muted dark:text-text-dark-muted mb-8 max-w-2xl mx-auto">
+          <p className="text-center mb-8 max-w-2xl mx-auto" style={{ color: 'var(--color-text-secondary)' }}>
             Choose a tool below to get started. All tools include free color customization and logo embedding.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -52,13 +65,21 @@ export default function HomePage() {
               <Link
                 key={tool.slug}
                 href={`/${tool.slug}`}
-                className="card hover:border-primary dark:hover:border-primary-light transition-all duration-200 group hover:-translate-y-1"
+                className="rounded-xl p-6 transition-all duration-200 group no-underline"
+                style={{
+                  backgroundColor: 'var(--color-bg-card)',
+                  border: hoveredSlug === tool.slug ? '2px solid var(--color-brand)' : '2px solid var(--color-border)',
+                  boxShadow: hoveredSlug === tool.slug ? 'var(--shadow-lg)' : 'var(--shadow-card)',
+                  transform: hoveredSlug === tool.slug ? 'translateY(-2px)' : 'translateY(0)',
+                }}
+                onMouseEnter={() => setHoveredSlug(tool.slug)}
+                onMouseLeave={() => setHoveredSlug(null)}
               >
                 <div className="text-4xl mb-4">{tool.icon}</div>
-                <h3 className="text-lg font-semibold text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-primary-light transition-colors mb-2">
+                <h3 className="text-lg font-semibold transition-colors mb-2" style={{ color: hoveredSlug === tool.slug ? 'var(--color-brand)' : 'var(--color-text-heading)' }}>
                   {tool.name}
                 </h3>
-                <p className="text-sm text-muted dark:text-text-dark-muted leading-relaxed">
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                   {tool.description}
                 </p>
               </Link>
@@ -68,7 +89,7 @@ export default function HomePage() {
 
         {/* Key Features */}
         <section className="mt-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-text dark:text-text-dark text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8" style={{ color: 'var(--color-text-heading)' }}>
             Why Choose {siteConfig.name}?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -82,8 +103,8 @@ export default function HomePage() {
             ].map((feature) => (
               <div key={feature.title} className="card text-center">
                 <div className="text-3xl mb-3">{feature.icon}</div>
-                <h3 className="font-semibold text-text dark:text-text-dark mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted dark:text-text-dark-muted leading-relaxed">{feature.desc}</p>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--color-text-heading)' }}>{feature.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -95,19 +116,19 @@ export default function HomePage() {
 
         {/* SEO Content */}
         <section className="mt-16 card max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-text dark:text-text-dark mb-4">What is a QR Code?</h2>
-          <div className="prose prose-sm max-w-none text-muted dark:text-text-dark-muted space-y-4">
+          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--color-text-heading)' }}>What is a QR Code?</h2>
+          <div className="prose prose-sm max-w-none space-y-4" style={{ color: 'var(--color-text-secondary)' }}>
             <p>
               A QR (Quick Response) code is a two-dimensional barcode that can store various types of data including URLs, text, WiFi credentials, and contact information. Originally invented in 1994 by Denso Wave for tracking automotive parts, QR codes have become ubiquitous in modern life — from restaurant menus to payment systems.
             </p>
             <p>
               QR codes work by encoding data into a matrix of black and white squares. When scanned by a smartphone camera or QR reader app, the encoded data is instantly decoded and acted upon. For example, a URL QR code will open the website in your browser, while a WiFi QR code will prompt you to connect to the network.
             </p>
-            <h3 className="text-lg font-semibold text-text dark:text-text-dark">How QR Code Error Correction Works</h3>
+            <h3 className="text-lg font-semibold" style={{ color: 'var(--color-text-heading)' }}>How QR Code Error Correction Works</h3>
             <p>
               QR codes include built-in error correction using Reed-Solomon algorithms. This means even if part of the QR code is damaged or obscured (for example, by a logo in the center), it can still be scanned successfully. There are four error correction levels: Low (7%), Medium (15%), Quartile (25%), and High (30%). When embedding a logo, we recommend using High error correction to ensure reliable scanning.
             </p>
-            <h3 className="text-lg font-semibold text-text dark:text-text-dark">Common QR Code Use Cases</h3>
+            <h3 className="text-lg font-semibold" style={{ color: 'var(--color-text-heading)' }}>Common QR Code Use Cases</h3>
             <p>
               Businesses use QR codes for marketing campaigns, product packaging, business cards, event tickets, and contactless payments. Restaurants use them for digital menus, while retailers use them for product information and reviews. WiFi QR codes are popular in hotels, cafes, and offices to simplify network access for guests.
             </p>
