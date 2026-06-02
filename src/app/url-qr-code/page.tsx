@@ -9,11 +9,11 @@ import AdSlot from "@/components/ui/AdSlot";
 export const metadata: Metadata = {
   title: "URL QR Code Generator - Create QR Codes for Any Website Link",
   description: "Generate QR codes for any URL with custom colors, logo embedding, and multiple download formats (PNG, SVG, JPEG). Free, no signup required. 100% client-side.",
-  alternates: { canonical: "https://qrcodegenerator.one/url-qr-code" },
+  alternates: { canonical: "https://www.qrcodegenerator.one/url-qr-code" },
   openGraph: {
     title: "URL QR Code Generator - Free with Custom Colors & Logo",
     description: "Generate QR codes for any URL with custom colors and logo embedding. Download as PNG, SVG, or JPEG.",
-    url: "https://qrcodegenerator.one/url-qr-code",
+    url: "https://www.qrcodegenerator.one/url-qr-code",
   },
 };
 

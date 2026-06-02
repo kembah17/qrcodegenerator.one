@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/tools-data";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: `Privacy policy for ${siteConfig.name}. Learn how we protect your data — all processing happens in your browser.`,
-  alternates: { canonical: "https://qrcodegenerator.one/privacy" },
+  alternates: { canonical: "https://www.qrcodegenerator.one/privacy" },
 };
 
 export default function PrivacyPage() {

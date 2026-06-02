@@ -9,11 +9,11 @@ import AdSlot from "@/components/ui/AdSlot";
 export const metadata: Metadata = {
   title: "vCard QR Code Generator - Create Digital Business Card QR Codes",
   description: "Generate a vCard QR code with your name, phone, email, company, and address. Recipients scan to save your contact info instantly. Free with custom colors.",
-  alternates: { canonical: "https://qrcodegenerator.one/vcard-qr-code" },
+  alternates: { canonical: "https://www.qrcodegenerator.one/vcard-qr-code" },
   openGraph: {
     title: "vCard QR Code Generator - Digital Business Card",
     description: "Generate a vCard QR code with your contact information. Recipients scan to save your details instantly.",
-    url: "https://qrcodegenerator.one/vcard-qr-code",
+    url: "https://www.qrcodegenerator.one/vcard-qr-code",
   },
 };
 

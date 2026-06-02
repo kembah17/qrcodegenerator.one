@@ -48,6 +48,6 @@ export const siteConfig = {
   name: "qrcodegenerator.one",
   title: "QR Code Generator Suite",
   description: "Free online QR code generator with color customization and logo embedding. Create QR codes for URLs, text, WiFi, vCards, and bulk generation. 100% client-side, private, and fast.",
-  url: "https://qrcodegenerator.one",
+  url: "https://www.qrcodegenerator.one",
   email: "hello@qrcodegenerator.one",
 };
