@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://www.qrcodegenerator.one</loc><lastmod>2026-06-02T06:07:26.390Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
-<url><loc>https://www.qrcodegenerator.one/about</loc><lastmod>2026-06-02T06:07:26.391Z</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
-<url><loc>https://www.qrcodegenerator.one/bulk-qr-generator</loc><lastmod>2026-06-02T06:07:26.391Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://www.qrcodegenerator.one/privacy</loc><lastmod>2026-06-02T06:07:26.391Z</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
-<url><loc>https://www.qrcodegenerator.one/text-qr-code</loc><lastmod>2026-06-02T06:07:26.391Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://www.qrcodegenerator.one/url-qr-code</loc><lastmod>2026-06-02T06:07:26.391Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://www.qrcodegenerator.one/vcard-qr-code</loc><lastmod>2026-06-02T06:07:26.391Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://www.qrcodegenerator.one/wifi-qr-code</loc><lastmod>2026-06-02T06:07:26.391Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.qrcodegenerator.one</loc><lastmod>2026-06-04T08:51:10.815Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.qrcodegenerator.one/about</loc><lastmod>2026-06-04T08:51:10.816Z</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+<url><loc>https://www.qrcodegenerator.one/bulk-qr-generator</loc><lastmod>2026-06-04T08:51:10.816Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.qrcodegenerator.one/privacy</loc><lastmod>2026-06-04T08:51:10.816Z</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+<url><loc>https://www.qrcodegenerator.one/text-qr-code</loc><lastmod>2026-06-04T08:51:10.816Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.qrcodegenerator.one/url-qr-code</loc><lastmod>2026-06-04T08:51:10.816Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.qrcodegenerator.one/vcard-qr-code</loc><lastmod>2026-06-04T08:51:10.816Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.qrcodegenerator.one/wifi-qr-code</loc><lastmod>2026-06-04T08:51:10.816Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
