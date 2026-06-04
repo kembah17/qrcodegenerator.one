@@ -34,7 +34,7 @@ export default function HomePage() {
             <Link
               href="/url-qr-code"
               className="text-lg px-8 py-4 rounded-lg font-semibold transition-all duration-200"
-              style={{ backgroundColor: 'var(--color-brand)', color: '#FFFFFF' }}
+              style={{ backgroundColor: 'var(--color-primary)', color: '#FFFFFF' }}
             >
               Create QR Code Now
             </Link>
