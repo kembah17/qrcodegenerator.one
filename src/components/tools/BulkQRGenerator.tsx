@@ -1,8 +1,25 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import QRCode from "qrcode";
 import JSZip from "jszip";
+
+type DeviceTier = "desktop" | "tablet" | "mobile";
+
+function detectDeviceTier(): DeviceTier {
+  if (typeof window === "undefined") return "desktop";
+  const width = window.innerWidth;
+  const cores = navigator.hardwareConcurrency || 2;
+  if (width >= 1024 || cores >= 4) return "desktop";
+  if (width >= 768 || cores >= 2) return "tablet";
+  return "mobile";
+}
+
+const ITEM_LIMITS: Record<DeviceTier, number> = {
+  mobile: 200,
+  tablet: 500,
+  desktop: 1000,
+};
 
 interface BulkItem {
   text: string;
@@ -18,7 +35,19 @@ export default function BulkQRGenerator() {
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#ffffff");
   const [size, setSize] = useState(300);
+  const [limitWarning, setLimitWarning] = useState("");
+  const [deviceTier, setDeviceTier] = useState<DeviceTier>("desktop");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const abortRef = useRef(false);
+
+  useEffect(() => {
+    setDeviceTier(detectDeviceTier());
+    const handleResize = () => setDeviceTier(detectDeviceTier());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const maxItems = ITEM_LIMITS[deviceTier];
 
   const parseInput = useCallback((text: string): string[] => {
     return text
@@ -42,16 +71,42 @@ export default function BulkQRGenerator() {
     reader.readAsText(file);
   };
 
+  const cancelGeneration = useCallback(() => {
+    abortRef.current = true;
+  }, []);
+
   const generateAll = async () => {
     const lines = parseInput(inputText);
     if (lines.length === 0) return;
 
+    // Check item count limit
+    if (lines.length > maxItems) {
+      setLimitWarning(
+        `Too many items for ${deviceTier} device. Maximum ${maxItems} items allowed. You have ${lines.length} items. Please reduce the list or use a desktop computer.`
+      );
+      return;
+    }
+    setLimitWarning("");
+
     setIsGenerating(true);
     setProgress(0);
+    abortRef.current = false;
     const newItems: BulkItem[] = lines.map((text) => ({ text, status: "pending" }));
     setItems(newItems);
 
     for (let i = 0; i < newItems.length; i++) {
+      // Check for cancellation
+      if (abortRef.current) {
+        abortRef.current = false;
+        // Mark remaining items as pending
+        for (let j = i; j < newItems.length; j++) {
+          newItems[j].status = "pending";
+        }
+        setItems([...newItems]);
+        setIsGenerating(false);
+        return;
+      }
+
       newItems[i].status = "generating";
       setItems([...newItems]);
       try {
@@ -94,9 +149,11 @@ export default function BulkQRGenerator() {
   };
 
   const handleClear = () => {
+    abortRef.current = true;
     setInputText("");
     setItems([]);
     setProgress(0);
+    setLimitWarning("");
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -104,6 +161,13 @@ export default function BulkQRGenerator() {
 
   return (
     <div className="space-y-6">
+      {/* Limit Warning */}
+      {limitWarning && (
+        <div className="p-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-300 text-sm">
+          {limitWarning}
+        </div>
+      )}
+
       {/* Input Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
@@ -114,12 +178,20 @@ export default function BulkQRGenerator() {
             <textarea
               id="bulk-input"
               value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
+              onChange={(e) => {
+                setInputText(e.target.value);
+                setLimitWarning("");
+              }}
               placeholder={"https://example.com\nhttps://google.com\nhttps://github.com\nHello World"}
               rows={8}
               className="input-field resize-y font-mono text-sm"
             />
-            <p className="text-xs text-muted dark:text-text-dark-muted mt-1">{lineCount} item{lineCount !== 1 ? "s" : ""} detected</p>
+            <p className="text-xs text-muted dark:text-text-dark-muted mt-1">
+              {lineCount} item{lineCount !== 1 ? "s" : ""} detected
+              {lineCount > maxItems && (
+                <span className="text-red-500 font-medium"> (exceeds {maxItems} limit for {deviceTier})</span>
+              )}
+            </p>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted dark:text-text-dark-muted">Or upload CSV:</span>
@@ -159,10 +231,21 @@ export default function BulkQRGenerator() {
             <button onClick={generateAll} disabled={lineCount === 0 || isGenerating} className="btn-primary flex-1 text-sm disabled:opacity-50">
               {isGenerating ? "Generating..." : `Generate ${lineCount} QR Code${lineCount !== 1 ? "s" : ""}`}
             </button>
+            {isGenerating && (
+              <button
+                onClick={cancelGeneration}
+                className="px-4 py-2 text-sm font-medium rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
+              >
+                Cancel
+              </button>
+            )}
             <button onClick={handleClear} className="btn-secondary text-sm">
               Clear
             </button>
           </div>
+          <p className="text-xs text-muted dark:text-text-dark-muted">
+            Device: {deviceTier} &middot; Max {maxItems} items
+          </p>
         </div>
       </div>
 
