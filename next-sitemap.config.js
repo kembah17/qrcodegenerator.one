@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://www.qrcodegenerator.one',
+  siteUrl: 'https://qrcodegenerator.one',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   outDir: './out',

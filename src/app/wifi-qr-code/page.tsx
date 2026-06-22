@@ -9,11 +9,11 @@ import AdSlot from "@/components/ui/AdSlot";
 export const metadata: Metadata = {
   title: "WiFi QR Code Generator - Share WiFi Password with a QR Code",
   description: "Create a QR code for your WiFi network. Guests can scan to connect instantly — no typing passwords. Supports WPA, WPA2, WPA3, WEP, and open networks.",
-  alternates: { canonical: "https://www.qrcodegenerator.one/wifi-qr-code" },
+  alternates: { canonical: "https://qrcodegenerator.one/wifi-qr-code" },
   openGraph: {
     title: "WiFi QR Code Generator - One-Scan WiFi Connect",
     description: "Create a QR code for your WiFi network. Guests scan to connect instantly without typing passwords.",
-    url: "https://www.qrcodegenerator.one/wifi-qr-code",
+    url: "https://qrcodegenerator.one/wifi-qr-code",
   },
 };
 

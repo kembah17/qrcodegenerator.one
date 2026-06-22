@@ -9,11 +9,11 @@ import AdSlot from "@/components/ui/AdSlot";
 export const metadata: Metadata = {
   title: "Text QR Code Generator - Encode Any Text into a QR Code",
   description: "Encode any plain text, message, or note into a scannable QR code. Supports multi-line text with custom colors and logo embedding. Free, no signup.",
-  alternates: { canonical: "https://www.qrcodegenerator.one/text-qr-code" },
+  alternates: { canonical: "https://qrcodegenerator.one/text-qr-code" },
   openGraph: {
     title: "Text QR Code Generator - Free with Custom Colors & Logo",
     description: "Encode any plain text into a scannable QR code with custom colors and logo embedding.",
-    url: "https://www.qrcodegenerator.one/text-qr-code",
+    url: "https://qrcodegenerator.one/text-qr-code",
   },
 };
 

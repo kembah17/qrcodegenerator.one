@@ -9,11 +9,11 @@ import AdSlot from "@/components/ui/AdSlot";
 export const metadata: Metadata = {
   title: "Bulk QR Code Generator - Generate Multiple QR Codes at Once",
   description: "Generate hundreds of QR codes at once from a CSV file or text list. Download all as a ZIP archive. Free bulk QR code generation with custom colors.",
-  alternates: { canonical: "https://www.qrcodegenerator.one/bulk-qr-generator" },
+  alternates: { canonical: "https://qrcodegenerator.one/bulk-qr-generator" },
   openGraph: {
     title: "Bulk QR Code Generator - Mass QR Code Creation",
     description: "Generate hundreds of QR codes at once from a CSV file or text list. Download all as a ZIP archive.",
-    url: "https://www.qrcodegenerator.one/bulk-qr-generator",
+    url: "https://qrcodegenerator.one/bulk-qr-generator",
   },
 };
 
